@@ -1,4 +1,4 @@
-onst todoList = () => {
+const todoList = () => {
   all = []
   const add = (todoItem) => {
     all.push(todoItem)
@@ -8,36 +8,42 @@ onst todoList = () => {
   }
 
   const overdue = () => {
-    // Write the date check condition here and return the array of overdue items accordingly.
-    // FILL YOUR CODE HERE
-    // ..
-    // .
-    // ..
+    return all.filter((myitem)=> {
+      return myitem.dueDate <= yesterday && myitem.completed === false
+    })
   }
 
   const dueToday = () => {
-    // Write the date check condition here and return the array of todo items that are due today accordingly.
-    // FILL YOUR CODE HERE
-    // ..
-    // ..
-    // ..
+      return all.filter((myitem)=> {
+          return myitem.dueDate === today 
+        })
   }
 
   const dueLater = () => {
-    // Write the date check condition here and return the array of todo items that are due later accordingly.
-    // FILL YOUR CODE HERE
-    // ..
-    // ..
-    // ..
+      return all.filter((myitem)=> {
+          return myitem.dueDate === tomorrow 
+        })
   }
 
   const toDisplayableList = (list) => {
-    // Format the To-Do list here, and return the output string as per the format given above.
-    // FILL YOUR CODE HERE
-    // ..
-    // ..
-    // ..
-    // return OUTPUT_STRING
+    let mywdlist = [];
+      list.forEach((myitem) => {
+          if (myitem.dueDate === today) {
+              if (myitem.completed === true) {
+                  mywdlist.push(`[x] ${myitem.title}`)
+              } else {
+                  mywdlist.push(`[ ] ${myitem.title}`)
+              }
+          } else {
+              if (myitem.completed === true) {
+                  mywdlist.push(`[x] ${myitem.title} ${myitem.dueDate}`)
+              }else{
+                  mywdlist.push(`[ ] ${myitem.title} ${myitem.dueDate}`)
+              }
+          }
+      })
+      return mywdlist.join("\n")
+  
   }
 
   return { all, add, markAsComplete, overdue, dueToday, dueLater, toDisplayableList };
